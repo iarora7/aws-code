@@ -3,4 +3,4 @@
 SELECT nextval('address_id_seq');
 
 #Alter sequence starting value
-ALTER SEQUENCE address_id_seq RESTART WITH 3
+ALTER SEQUENCE address_#id_seq RESTART WITH 3

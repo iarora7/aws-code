@@ -15,34 +15,38 @@ def search_house_available():
     radius = (float(request.args.get('radius')) * 1609.34) # user provides the radius in miles which will be converted to meters for the query
 
     cur = conn.cursor()
-    cur.execute("SELECT *  \
+    cur.execute("SELECT *, ST_AsText(location)  \
                    FROM house_available ha \
                    WHERE ST_DWITHIN( \
-                                     ST_GeomFromText('POINT(%s %s)')::geography, \
-                                     ST_GeomFromText(ha.location),  \
+                                     ST_GeomFromText('POINT(%s %s)',4326)::geography, \
+                                     (ha.location),  \
                                      %s \
-                                    )", (latitude, longitude, radius))
+                                    )", (longitude, latitude, radius))
 
     data = cur.fetchall()
 
     houseList = []
     for row in data:
-        latLongList =  re.findall(r"[-+]?\d*\.\d+|\d+", row[11])
+        latLongList =  re.findall(r"[-+]?\d*\.\d+|\d+", row[16])
         houseDict = {
-            'Id'            : row[0],
-            'StreetAddress' : row[1].strip(),
-            'AptNo'         : row[2],
-            'City'          : row[3].strip(),
-            'State'         : row[4].strip(),
-            'Zip'           : row[5],
-            'Spots'         : row[6],
-            'Price'         : row[7],
-            'StartDate'     : row[8],
-            'EndDate'       : row[9],
-            'Summary'       : row[10].strip(),
-            'Point'         : row[11],
-            'Latitude'      : float(latLongList[0]),
-            'Longitude'     : float(latLongList[1])
+            'id'            : row[0],
+            'user_id'       : row[1],
+            'StreetAddress' : row[2],
+            'AptNo'         : row[3],
+            'City'          : row[4].strip(),
+            'State'         : row[5].strip(),
+            'Zip'           : row[6],
+            'Spots'         : row[7],
+            'Price'         : row[8],
+            'StartDate'     : row[9],
+            'EndDate'       : row[10],
+            'Title'         : row[11].strip(),
+            'Description'   : row[12].strip(),
+            'PhoneNumber'   : row[13],
+            'Available'     : row[14],
+            'Point'         : row[16],
+            'Latitude'      : latLongList[1],
+            'Longitude'     : latLongList[0]
 
         }
         houseList.append(houseDict)

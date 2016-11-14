@@ -35,5 +35,4 @@ def getPublicPlaces():
         }
         public_places.append(place)
 
-    return jsonify(public_places = public_places)
-~                                                  
+    return jsonify(public_places = public_places)                                               

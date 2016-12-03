@@ -43,14 +43,9 @@ VALUES ('1110 Hayne Rd', 2, 'Los Angeles', 'California', '90007', 2, 2700.00, '2
 COMMIT;
 
 
-
-
-
-
 SELECT *
 FROM house_available
 WHERE ST_WITHIN(location('POINT(34.031096, -118.289951)', 2000), location('POINT(34.031096, -118.289951)', 3000));
-
 
 
 SELECT *
@@ -59,8 +54,6 @@ WHERE ST_WITHIN (
                   ST_Buffer(ST_GeomFromText('POINT(34.031096 -118.289951)'), 4000), 
                   ST_Buffer(ST_GeomFromText('POINT(34.031096 -118.289951)'), 3000)
                  );
-
-
 
 SELECT *
 FROM house_available ha
@@ -71,10 +64,7 @@ WHERE ST_WITHIN (
 
 ALTER TABLE house_available ALTER COLUMN location TYPE TEXT;
 
-
 address  in irvine 33.712409 -117.782568
-
-
 
 SELECT *
 FROM house_available
@@ -82,11 +72,6 @@ WHERE ST_WITHIN (
                   ST_GeomFromText('POINT(34.033707 -118.279622)'), 
                   ST_Buffer(ST_GeomFromText('POINT(34.031096 -118.289951)'), 482.8032)
                  );
-
-
-
-
-
 
 
 // this is a working query to find the points that lie within the given circle

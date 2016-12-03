@@ -19,18 +19,27 @@ def getImage():
         image = {
         'image_name' : data[0][0],
         'image_data' : data[0][1]
-        }    
-        
-    return jsonify(image = image)      
+        }
+
+    return jsonify(image = image)
 
 # http://ec2-52-53-202-11.us-west-1.compute.amazonaws.com:8080/addImage?img_name=school&img_data=base64string
-@app.route("/addImage", methods=['GET']) 
+@app.route("/addImage", methods=['GET'])
 def addImage():
     img_name = request.args.get('img_name')
     img_data = request.args.get('img_data')
+    img_data = img_data.encode('utf-8')
+    if type(img_data) is str:
+        print("it is string ", type(img_data))
+    else:
+        print("it is not string ", type(img_data))
+    #print("image is: ", img_data)
+    img_data = img_data.replace("-","+")
+    img_data = img_data.replace("_","/")
+    img_data = img_data.replace(",","=")
+    #print("image again: ", img_data)
     cur = conn.cursor()
-    cur.execute("INSERT INTO images (img_name, img_data) \
-                VALUES (%s, decode(%s, 'base64'))",
-                (img_name, img_data))
+    cur.execute("INSERT INTO images (img_name, img_data) VALUES (%s, decode(%s, 'base64'))", \
+               (img_name, img_data));
     conn.commit()
     return ("image " + img_name + " saved.")

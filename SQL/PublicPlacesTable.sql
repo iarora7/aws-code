@@ -41,9 +41,47 @@ INSERT into public_places
 (3, 'Orthopaedic Institute for Children', ST_GeomFromText('POINT(-118.273375 34.028770)' , 4326), '403 W Adams Blvd', 'Los Angles', 'California', '90007', 4)
 ;
 
+INSERT into public_places
+(category_id, name, location, st_address, city, state, zip, rating) VALUES
+(4, 'Green Dot Public Schools', ST_GeomFromText('POINT(-118.261197 34.040648)' , 4326), '1149 Hill S', 'Los Angles', 'California', '90015', 3)
+;
+
+INSERT into public_places
+(category_id, name, location, st_address, city, state, zip, rating) VALUES
+(2, 'With Love Market & Cafe', ST_GeomFromText('POINT(-118.291839 34.040003)' , 4326), '1969 S Vermont Ave', 'Los Angles', 'California', '90007', 4)
+;
+
+INSERT into public_places
+(category_id, name, location, st_address, city, state, zip, rating) VALUES
+(2, 'Ralphs', ST_GeomFromText('POINT(-118.291152 34.033246)' , 4326), '2600 S Vermont Ave', 'Los Angles', 'California', '90007', 4)
+;
+
+INSERT into public_places
+(category_id, name, location, st_address, city, state, zip, rating) VALUES
+(2, 'Superior Grocers', ST_GeomFromText('POINT(-118.251499 34.023856)' , 4326), '2000 S Central Ave', 'Los Angles', 'California', '90011', 4)
+;
+
+INSERT into public_places
+(category_id, name, location, st_address, city, state, zip, rating) VALUES
+(1, 'Lyon Center', ST_GeomFromText('POINT(-118.288335 34.025349)' , 4326), '1026 W 34th St', 'Los Angles', 'California', '90089', 4)
+;
+
+INSERT into public_places
+(category_id, name, location, st_address, city, state, zip, rating) VALUES
+(1, 'City of Angels Boxing', ST_GeomFromText('POINT(-118.272671 34.023073)' , 4326), '3000 Hill St', 'Los Angles', 'California', '90007', 4)
+;
+
+INSERT into public_places
+(category_id, name, location, st_address, city, state, zip, rating) VALUES
+(1, 'Planet Fitness', ST_GeomFromText('POINT(-118.252114 34.025563)' , 4326), '1000 E Washington Blvd', 'Los Angles', 'California', '90021', 4)
+;
+
+
+
+
 UPDATE public_places
 SET st_address = '3670 Trousdale Pkwy'
 where id=4
 
-SELECT ST_AsText(location) 
+SELECT ST_AsText(location)
        FROM public_places;

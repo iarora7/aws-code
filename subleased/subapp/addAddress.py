@@ -15,8 +15,9 @@ def addAddress():
     title = request.args.get('title')
     address = request.args.get('address')
     aptNum = request.args.get('aptNum')
-    if aptNum is None:
-        aptNum = 0
+    if not aptNum:
+        print("aptNum is empty")
+        aptNum = None
     city = request.args.get('city')
     state = request.args.get('state')
     zipcd = request.args.get('zipcd')
@@ -37,4 +38,13 @@ def addAddress():
     (1349781218406667, address, aptNum, city, state, zipcd, vacancies, price, start_date, end_date, \
         title, description, phone_number, available, location));
     conn.commit()
-    return ("address saved with ph: " + phone_number)
+    return ("address saved with ph: " + phone_number )
+
+@app.route("/deleteHouse", methods=['GET'])
+def deleteHouse():
+    userId = long(request.args.get('userId'))
+    houseId = int(request.args.get('houseId'))
+    cur = conn.cursor()
+    cur.execute("DELETE FROM house_available WHERE user_id=%s AND id=%s", (userId,houseId))
+    conn.commit()
+    return ("House successfully deleted")
